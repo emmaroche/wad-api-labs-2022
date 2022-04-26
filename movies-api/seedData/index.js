@@ -4,6 +4,7 @@ import users from './users';
 import genres from './genres';
 import dotenv from 'dotenv';
 
+
 dotenv.config();
 
 // deletes all user documents in collection and inserts test data
