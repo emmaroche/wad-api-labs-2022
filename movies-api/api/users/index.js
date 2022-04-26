@@ -37,11 +37,17 @@ router.post('/',asyncHandler( async (req, res, next) => {
       res.status(401).json({success: false, msg: 'Please pass username and password.'});
       return next();
     }
+
     if (req.query.action === 'register') {
+        let passwordRegEx = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/;
+      const validPassword = passwordRegEx.test(req.body.password);
+      if (!validPassword) return res.status(401).json({ code: 401, msg: 'Authentication failed. Bad password.' });
       await User.create(req.body);
       res.status(201).json({code: 201, msg: 'Successful created new user.'});
     } else {
       const user = await User.findByUserName(req.body.username);
+      
+
         if (!user) return res.status(401).json({ code: 401, msg: 'Authentication failed. User not found.' });
         user.comparePassword(req.body.password, (err, isMatch) => {
           if (isMatch && !err) {
@@ -92,6 +98,7 @@ router.post('/:userName/favourites', asyncHandler(async (req, res) => {
     await user.favourites.push(movie._id);
     await user.save(); 
     res.status(201).json(user); 
+    if (array.includes(value) === false) array.push(value);
   }));
 
 // router.get('/:id/favourites', async (req, res) => {
