@@ -98,7 +98,7 @@ router.post('/:userName/favourites', asyncHandler(async (req, res) => {
     await user.favourites.push(movie._id);
     await user.save(); 
     res.status(201).json(user); 
-    if (array.includes(value) === false) array.push(value);
+    if (array.includes(value) === false) array.push(value); //Exercise: Improve the code so that a movie can only appear once in the favourites array
   }));
 
 // router.get('/:id/favourites', async (req, res) => {
