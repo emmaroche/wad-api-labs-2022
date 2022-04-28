@@ -7,13 +7,23 @@ export const PublicPage = () => {
  }
  export const Movies = () => {
     const context = useContext(MoviesContext);
-    return <>
-        <h2>Movies Data</h2>
-        <div>
-            {context.movies.results.map(movie => { return <>{movie.id},{movie.title}<br /></> })}
-        </div>
-    </>
+    let movies = "";
+    if (context.movies){
+        movies = (
+            <div>
+                {context.movies.map(movie => { return <>{movie.id},{movie.title}<br /></> })}
+            </div>
+        )
+    }
+    else {
+        movies = (
+            <div>
+                Movies are loading
+            </div>
+        )
+    }
 }
+
  export const Profile = () => {
     return <h2>My Profile </h2>
 }
