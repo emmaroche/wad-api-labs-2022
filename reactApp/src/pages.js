@@ -22,7 +22,11 @@ export const PublicPage = () => {
             </div>
         )
     }
-}
+    return <>
+        <h2>Movies Data</h2>
+        {movies}
+    </>
+ }
 
  export const Profile = () => {
     return <h2>My Profile </h2>
